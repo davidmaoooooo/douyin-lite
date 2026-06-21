@@ -10,7 +10,6 @@
     "beforeBuildCommand": "cd frontend && npx vite build --mode desktop"
   },
   "app": {
-    "title": "抖音精简版",
     "windows": [
       {
         "label": "main",
@@ -30,7 +29,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": "dmg",
+    "targets": ["dmg"],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -40,12 +39,7 @@
     ],
     "externalBin": [
       "binaries/douyin-api"
-    ],
-    "dmg": {
-      "appPosition": { "x": 220, "y": 220 },
-      "applicationFolderPosition": { "x": 520, "y": 220 },
-      "windowSize": { "width": 740, "height": 500 }
-    }
+    ]
   },
   "plugins": {
     "shell": {

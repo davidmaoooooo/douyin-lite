@@ -1,0 +1,13 @@
+{
+  "name": "douyin-lite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "抖音精简版 macOS 桌面应用 - 学习用途",
+  "scripts": {
+    "frontend:dev": "cd frontend && npx vite --mode desktop",
+    "frontend:build": "cd frontend && npx vite build --mode desktop",
+    "backend:dev": "cd backend && python3 app.py",
+    "tauri:dev": "cargo tauri dev",
+    "tauri:build": "cargo tauri build"
+  }
+}

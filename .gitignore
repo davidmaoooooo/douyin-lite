@@ -1,0 +1,12 @@
+node_modules/
+dist/
+backend/venv/
+backend/dist/
+backend/build/
+backend/*.spec
+backend/config/cookie.json
+src-tauri/target/
+src-tauri/binaries/
+*.dmg
+.DS_Store
+reference/

@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "valid": true,
+    "freeze": "三源全冻结: Date.now=new Date=FT, Math.random=FR, performance.now=FP",
+    "fixed": {"Date.now": 1700000000000, "Math.random": 0.5, "performance.now": 12345, "ua": "页面默认 Chrome/149", "base_url": "https://www.douyin.com/aweme/v1/web/aweme/detail/"},
+    "collector": "用SDK重写的XHR发GET请求, 从xhr.responseURL提取a_bogus, readyState>=2拿到即abort",
+    "findings": [
+      "performance.now/method(GET=POST)/body 均不影响结果",
+      "三源冻结后同输入连续5次完全相同(确定性)",
+      "s4编码表与旧douyin.js一致(64字符集吻合), 末尾'='",
+      "解码137字节为RC4密文(找不到旧明文锚点44/aid), RC4密钥已非121",
+      "random字节进入RC4输入->改random整段雪崩",
+      "query改1字符仅影响中段~12字符+末尾2字符(双SM3取2字节注入)",
+      "长度有184/185/188(明文非3倍数时base64长度浮动)"
+    ]
+  },
+  "CLEAN_q1_baseline": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSyNBTobbeTSxu-K1eaZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSUf=",
+  "query_dim": {
+    "q=1": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSyNBTobbeTSxu-K1eaZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSUf=",
+    "q=2": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSycBToWO1TSPTJK1ePZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSAD=",
+    "q=a": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSyiBTobC1TSxutK1tPZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSfD=",
+    "q=b": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSynPToWcHTSOT7K1taZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uS6S=",
+    "q=aa": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSyOBToWC1TSPYUK1eOZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSRj=",
+    "(empty)": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSynPTobKZTSOTGK1eOZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSfS="
+  },
+  "time_dim": {
+    "+0": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSyNBTobbeTSxu-K1eaZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSUf=",
+    "+1": "O7UfhzU7dNmfCdMbuKiQH3PUGq9MrPSyNBTobbeTSxu-K1eaZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuqsjB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx5uSn6=",
+    "+256": "O7UfhzU7dNmfCdMbuKiQH3PUGH9MrPSyNBTobbeTSxu-K1eaZSE2uca2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSUY=",
+    "+65536": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSyNBTobbeTSxu-K1eaZSE2uOaZJxK/kSKRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSUf="
+  },
+  "random_dim": {
+    "0.0": "DfsfDqyEm2WbOVKtmOiKH5VUjHjlNTuyZMTdbJCT7xKBCXFaNbExuNc2bxLAvCnRzWMTh25HLDalYVdbszUwpqHpqmkfSYXWFU2I9U6LgqqkGe4MDNSgeu8FuwBKl/TTuCBtxCXvlUpjhxMAkN9LW2F9CCtrBSR0FHN9p1JyrDb83s6T9o/mSID=",
+    "0.25": "O7U5DzU7dqmfFV/buKT2H33lcHnMrB8yNBiObbePexu-KHMaZSYQuOagnxo/kWVRsRZkhM-7KDGMbjxbzTX0pK9kzmpDuQ7WB4/C96Xo/qwvTUGMLqyuew0zowsCMusTmcpXxH63XUkEXDFAwqC8WMKyyCeN-Ab0BrPApAj9GDcWpPyTVx2ES4g=",
+    "0.5": "O7UfhzU7dNmfCdMbuKiQH33UGHnMrPSyNBTobbeTSxu-K1eaZSE2uOa2Jxo/kSxRsRM0hM-HzDGMbfVbzTUkpK9pKmpDuOhWB42n96XL0qwvTtsMLqSEew0FwwsCM8GTmcB4xH6vIUkEXElAwq9DWMK9HCeN-Cm0BrNVpAjycDcWpBgTVx/uSUf=",
+    "0.75": "O7U5hzU7xqQRFd/bYKTdHV3laHnlrBWyqBiKbGePCxuBKHlapSY/uPagrxoAkWdR0RZhh/-7FDGlbjnbTTXspF9kumpfuQwWM4/c9XXoMqwkTUTMEqyYeL0zqwsKMu4T8cpvx9636UkjXDeAiqCmW/Ky7Cer-AY0MrP5plj9bDc8pPLTIx2LS4E="
+  },
+  "perf_dim_ALL_SAME_as_base": {
+    "_finding": "performance.now 不影响结果, p_0=p_1=p_256=base"
+  }
+}

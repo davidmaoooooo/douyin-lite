@@ -43,16 +43,7 @@
   },
   "plugins": {
     "shell": {
-      "open": true,
-      "scope": [
-        {
-          "name": "douyin-api",
-          "cmd": "binaries/douyin-api",
-          "args": [
-            { "validator": "--port \\d+" }
-          ]
-        }
-      ]
+      "open": true
     }
   }
 }
